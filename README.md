@@ -1,5 +1,5 @@
 # Electricity Consumption Prediction App
-
+![Energy Usage Analysis and Prediction](https://github.com/techwthjul/Electricity-Consumption-Prediction-App-Using-Shiny-and-R-Programming-/blob/main/IDS%20Project%20.png?raw=true)
 # Project Overview:
 This project was developed as part of the course IST-687: Introduction to Data Science at Syracuse University. The primary goal of this application is to predict electricity consumption based on various input parameters such as square footage, number of bedrooms, heating setpoint, and environmental factors like temperature, humidity, and wind speed.
 
@@ -22,11 +22,13 @@ Deployment: The app was deployed on a cloud platform, making it accessible to us
 Usage
 Input Data: Users can enter the date range, county, square footage, number of bedrooms, heating setpoint, dry bulb temperature, relative humidity, wind speed, and global horizontal radiation.
 Predict: Click the "Predict Energy Usage" button to get the predicted energy usage.
-Visualization: The app will display a pie chart showing the relative contribution of each input parameter to the prediction.
+
+# Visualization: 
+The app will display a pie chart showing the relative contribution of each input parameter to the prediction.
 Project Link
 You can access the app here: https://rijulugawekar17.shinyapps.io/IDSFINAL/
 
-#Contributions:
+# Contributions:
 Rijul Ugawekar: Developed the app as part of the IST-687 course, focusing on model development and app implementation.
-#License:
+# License:
 This project is licensed under the MIT License.
