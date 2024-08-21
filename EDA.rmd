@@ -1,0 +1,96 @@
+```{r}
+install.packages("ggplot2")
+install.packages("readr")
+library(ggplot2)
+library(readr)
+
+# Load the data
+df <- read_csv("C:/Users/Rijul/Desktop/project csv/energy_static_weather_data (1).csv")
+
+# Summary statistics for 'total_energy_usage'
+summary_stats <- summary(df$total_energy_usage)
+
+# Check for missing values
+missing_values <- sum(is.na(df$total_energy_usage))
+
+# Create a histogram
+ggplot(df, aes(x = total_energy_usage)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  theme_minimal() +
+  labs(title = "Histogram of Total Energy Usage", x = "Total Energy Usage", y = "Frequency")
+
+# Create a boxplot
+ggplot(df, aes(y = total_energy_usage)) +
+  geom_boxplot(fill = "orange", color = "black") +
+  theme_minimal() +
+  labs(title = "Boxplot of Total Energy Usage", y = "Total Energy Usage")
+
+# Print the summary statistics and missing values
+print(summary_stats)
+print(paste("Missing values:", missing_values))
+```
+```{r}
+#code for summary of the numeric data in that df
+library(readr)
+
+# Load the data
+df <- read_csv("C:/Users/Rijul/Desktop/project csv/energy_static_weather_data (1).csv")
+
+# Get a summary of all numeric columns
+numeric_summary <- summary(df[sapply(df, is.numeric)])
+
+# Print the summary
+print(numeric_summary)
+```
+```{r}
+#code for correlation matrix 
+# Assuming the DataFrame is loaded into 'df'
+
+library(ggplot2)
+library(reshape2)
+library(dplyr)
+library(readr)
+
+# Correct the file path and load the data
+df <- read_csv("C:/Users/Rijul/Desktop/project csv/energy_static_weather_data (1).csv")
+
+# Selecting numeric columns and excluding 'bldg_id'
+numeric_data <- df %>%
+  select(where(is.numeric)) %>%
+  select(-bldg_id)
+
+# Handling NA values to ensure they don't disrupt the correlation calculation
+numeric_data <- na.omit(numeric_data)
+
+# Calculating the correlation matrix
+correlation_matrix <- cor(numeric_data)
+
+# Extracting the 'total_energy_usage' column correlations
+total_energy_correlations <- correlation_matrix["total_energy_usage", , drop = FALSE]
+
+# Preparing the data for plotting
+correlation_data <- as.data.frame(total_energy_correlations)
+correlation_data$variable <- rownames(correlation_data)
+
+# Filtering out the 'total_energy_usage' to avoid self-correlation
+correlation_data <- correlation_data %>%
+  filter(variable != "total_energy_usage") %>%
+  arrange(desc(total_energy_usage))
+
+# Rename the columns to ensure unique names
+names(correlation_data) <- c("correlation", "variable")
+
+# Melt the data frame for plotting
+melted_data <- melt(correlation_data, id.vars = "variable")
+
+# Plotting the heatmap
+ggplot(melted_data, aes(x = variable, y = 1, fill = correlation)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90), axis.text.y = element_blank(),
+        axis.ticks = element_blank(), axis.title.x = element_blank(), axis.title.y = element_blank()) +
+  labs(fill = "Correlation") +
+  coord_flip() 
+```
+
